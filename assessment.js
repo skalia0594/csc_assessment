@@ -1,6 +1,8 @@
 module.exports = function sortCategoriesForInsert (inputJson) {
     // Your code happens...
     ///   ... which calculates properJsonOutput
+    
+    //get root nodes different for ease of output hierarchy structure
     let roots = [], temp =[], allData=[];
     inputJson.forEach(element => {
         if(element["parent_id"] === null) {
@@ -9,6 +11,8 @@ module.exports = function sortCategoriesForInsert (inputJson) {
             temp.push(element);
         }
     });
+    
+    //generate store-front limitation data
     for(let k = 0 ; k< roots.length; k++) { // for number of different roots
         let rootNode=[roots[k]];
         for(let i=0 ; i< rootNode.length; i++) { // for one root node
@@ -20,6 +24,8 @@ module.exports = function sortCategoriesForInsert (inputJson) {
         }
         allData = [...allData,...rootNode]; 
     }
+    
+    //stringify Json output
     const properJsonOutput = JSON.stringify(allData, null, 2);
     return properJsonOutput
 }
